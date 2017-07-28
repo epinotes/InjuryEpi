@@ -17,7 +17,7 @@ create_cond_hosp <- function(data, expr, colvec_1, colvec_m, ignore.case = T, co
   sel_m2 <- names(data)[colvec_m2]
   sel_col <- 1:length(sel_m2)
   
-  df2 <- as_data_frame(data[sel_m2]) %>% mutate_each(funs(as.character))
+  df2 <- as_data_frame(data[sel_m2]) %>% mutate_all(funs(as.character))
 
   create_diag <- function(data, expr, colvec, ignore.case = T){
     #regexp=regular expressions for the data
@@ -27,7 +27,7 @@ create_cond_hosp <- function(data, expr, colvec_1, colvec_m, ignore.case = T, co
     sel <- names(data)[colvec]
  
     # ensure they are all character vector
-    df <- as_data_frame(data[sel]) %>% mutate_each(funs(as.character))
+    df <- as_data_frame(data[sel]) %>% mutate_all(funs(as.character))
     
     # a function to assign "1" if the regular expression matched or "0" otherwise 
     f <- function(x) grepl(expr, x, ignore.case = ignore.case)+0
